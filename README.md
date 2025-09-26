@@ -35,17 +35,6 @@ Você pode visualizar, testar e explorar todos os endpoints REST disponíveis.
 	```
 	A aplicação estará disponível em `http://localhost:8080`.
 
-## Endpoints
-
-### Health Check
-
-- **GET** `/health-check`
-	 - Retorna: `Service is up and running`
-	 - Exemplo de requisição:
-		```shell
-		curl http://localhost:8080/health-check
-		```
-
 ## Testes
 
 Para rodar os testes automatizados:
@@ -54,6 +43,13 @@ Para rodar os testes automatizados:
 mvn test
 ```
 
-## Documentação
+## Integração com OpenTDB
 
-Consulte o arquivo `.github/copilot-instructions.md` para o checklist de setup e automações do projeto.
+O projeto implementa um client Java para consumir a API pública [OpenTDB](https://opentdb.com/api_config.php), permitindo buscar perguntas e respostas para o jogo.
+
+### Funcionamento
+
+- O client (`OpenTdbClient`) utiliza `RestTemplate` para realizar requisições HTTP.
+- O tratamento de erros é feito para garantir respostas padronizadas em caso de falha na comunicação.
+
+- [Documentação oficial](https://opentdb.com/api_config.php)
