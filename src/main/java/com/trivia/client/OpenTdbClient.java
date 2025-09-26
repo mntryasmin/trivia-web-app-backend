@@ -13,7 +13,7 @@ import com.trivia.client.dto.TdbTriviaDTO;
 @Component
 public class OpenTdbClient {
 
-    private static final String BASE_URL = "${url.external.api.tdb}";
+    private static final String BASE_URL = "https://opentdb.com";
 
     private final RestTemplate restTemplate;
 

@@ -1,10 +1,8 @@
 package com.trivia.controller;
 
-import com.trivia.client.OpenTdbClient;
 import com.trivia.client.dto.TdbCategoriesDTO;
 import com.trivia.client.dto.TdbQuestionsCountDTO;
-import com.trivia.client.dto.TdbResetTokenDTO;
-import com.trivia.client.dto.TdbTokenDTO;
+import com.trivia.service.OpenTdbService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,31 +16,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpenTdbController {
 
     @Autowired
-    private OpenTdbClient openTdbClient;
+    private OpenTdbService openTdbService;
 
     @GetMapping("/token")
-    public ResponseEntity<TdbTokenDTO> getToken() {
-        return ResponseEntity.ok(openTdbClient.getToken());
+    public ResponseEntity<String> getToken() {
+        return ResponseEntity.ok(openTdbService.getToken());
     }
 
     @GetMapping("/token/reset")
-    public ResponseEntity<TdbResetTokenDTO> resetToken(@RequestParam("token") String token) {
-        return ResponseEntity.ok(openTdbClient.getResetToken(token));
+    public ResponseEntity<String> resetToken(@RequestParam("token") String token) {
+        return ResponseEntity.ok(openTdbService.resetToken(token));
     }
 
     @GetMapping("/trivia")
     public ResponseEntity<?> getTrivia(@RequestParam(name = "amount", defaultValue = "10") Long amount,
             @RequestParam(name = "token", required = false) String token) {
-        return ResponseEntity.ok(openTdbClient.getTrivia(amount, token));
+        return ResponseEntity.ok(openTdbService.getTrivia(amount, token));
     }
 
     @GetMapping("/categories")
     public ResponseEntity<TdbCategoriesDTO> getAllCategories() {
-        return ResponseEntity.ok(openTdbClient.getAllCategories());
+        return ResponseEntity.ok(openTdbService.getAllCategories());
     }
 
     @GetMapping("/count")
     public ResponseEntity<TdbQuestionsCountDTO> getQuestionsCount() {
-        return ResponseEntity.ok(openTdbClient.getQuestionsCount());
+        return ResponseEntity.ok(openTdbService.getQuestionsCount());
     }
 }

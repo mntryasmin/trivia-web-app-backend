@@ -1,11 +1,3 @@
-## Documentação das APIs (Swagger)
-
-Após iniciar a aplicação, acesse a documentação interativa das APIs via Swagger UI:
-
-- [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-
-Você pode visualizar, testar e explorar todos os endpoints REST disponíveis.
-
 # Trivia Web App Backend
 
 > Backend da aplicação Trivia Web App, desenvolvido com Java 21 e Spring Boot.
@@ -42,6 +34,14 @@ Para rodar os testes automatizados:
 ```shell
 mvn test
 ```
+
+## Documentação das APIs (Swagger)
+
+Após iniciar a aplicação, acesse a documentação interativa das APIs via Swagger UI:
+
+- [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+Você pode visualizar, testar e explorar todos os endpoints REST disponíveis.
 
 ## Integração com OpenTDB
 
