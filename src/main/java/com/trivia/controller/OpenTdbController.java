@@ -19,27 +19,27 @@ public class OpenTdbController {
     private OpenTdbService openTdbService;
 
     @GetMapping("/token")
-    public ResponseEntity<String> getToken() {
+    public ResponseEntity<String> getToken() throws Exception {
         return ResponseEntity.ok(openTdbService.getToken());
     }
 
     @GetMapping("/token/reset")
-    public ResponseEntity<String> resetToken(@RequestParam("token") String token) {
+    public ResponseEntity<String> resetToken(@RequestParam("token") String token) throws Exception {
         return ResponseEntity.ok(openTdbService.resetToken(token));
     }
 
     @GetMapping("/trivia")
-    public ResponseEntity<?> getTrivia(@RequestParam(name = "amount", defaultValue = "10") Long amount) {
+    public ResponseEntity<?> getTrivia(@RequestParam(name = "amount", defaultValue = "10") Long amount) throws Exception {
         return ResponseEntity.ok(openTdbService.getTrivia(amount));
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<TdbCategoriesDTO> getAllCategories() {
+    public ResponseEntity<TdbCategoriesDTO> getAllCategories() throws Exception {
         return ResponseEntity.ok(openTdbService.getAllCategories());
     }
 
     @GetMapping("/count")
-    public ResponseEntity<TdbQuestionsCountDTO> getQuestionsCount() {
+    public ResponseEntity<TdbQuestionsCountDTO> getQuestionsCount() throws Exception {
         return ResponseEntity.ok(openTdbService.getQuestionsCount());
     }
 }
