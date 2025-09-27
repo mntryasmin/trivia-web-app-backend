@@ -14,6 +14,7 @@ import com.trivia.client.dto.TdbResetTokenDTO;
 import com.trivia.client.dto.TdbTokenDTO;
 import com.trivia.client.dto.TdbTriviaDTO;
 import com.trivia.exception.OpenTdbException;
+import com.trivia.service.dto.TdbParamsDTO;
 
 @Service
 public class OpenTdbService {
@@ -58,11 +59,11 @@ public class OpenTdbService {
     }
 
     // Questions
-    public TdbTriviaDTO getTrivia(Long amount) throws Exception {
+    public TdbTriviaDTO getTrivia(TdbParamsDTO params) throws Exception {
         try {
-            log.info("Fetching trivia questions, amount: {}", amount);
-            
-            TdbTriviaDTO triviaDTO = openTdbClient.getTrivia(amount, getToken());
+            log.info("Fetching trivia questions");
+
+            TdbTriviaDTO triviaDTO = openTdbClient.getTrivia(params);
             log.debug("Questions received: {}", triviaDTO);
             
             checkResponseCode(triviaDTO.getResponse_code());

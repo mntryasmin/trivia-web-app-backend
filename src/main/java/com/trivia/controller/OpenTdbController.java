@@ -3,10 +3,13 @@ package com.trivia.controller;
 import com.trivia.client.dto.TdbCategoriesDTO;
 import com.trivia.client.dto.TdbQuestionsCountDTO;
 import com.trivia.service.OpenTdbService;
+import com.trivia.service.dto.TdbParamsDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +31,9 @@ public class OpenTdbController {
         return ResponseEntity.ok(openTdbService.resetToken(token));
     }
 
-    @GetMapping("/trivia")
-    public ResponseEntity<?> getTrivia(@RequestParam(name = "amount", defaultValue = "10") Long amount) throws Exception {
-        return ResponseEntity.ok(openTdbService.getTrivia(amount));
+    @PostMapping("/trivia")
+    public ResponseEntity<?> getTrivia(@RequestBody TdbParamsDTO params) throws Exception {
+        return ResponseEntity.ok(openTdbService.getTrivia(params));
     }
 
     @GetMapping("/categories")
