@@ -9,6 +9,7 @@ import com.trivia.client.dto.TdbResetTokenDTO;
 import com.trivia.client.dto.TdbTokenDTO;
 import com.trivia.client.dto.TdbTriviaDTO;
 import com.trivia.service.dto.TdbParamsDTO;
+import com.trivia.service.dto.TdbTypeEnum;
 
 @Component
 public class OpenTdbClient {
@@ -47,7 +48,7 @@ public class OpenTdbClient {
             first = false;
         }
         if (params.getType() != null) {
-            urlBuilder.append(first ? "" : "&").append("type=").append(params.getType());
+            urlBuilder.append(first ? "" : "&").append("type=").append(params.getType().equals(TdbTypeEnum.BOOLEAN)? "boolean" : params.getType());
             first = false;
         }
         if (params.getToken() != null) {

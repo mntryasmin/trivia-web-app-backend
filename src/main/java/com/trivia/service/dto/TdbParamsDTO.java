@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class TdbParamsDTO {
     private Long amount;
     private Long category;
-    private String difficulty;
-    private String type;
+    private TdbDifficultyEnum difficulty;
+    private TdbTypeEnum type;
     private String token;
+    private TdbEncodeEnum encode;
 }
