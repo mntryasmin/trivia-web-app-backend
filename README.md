@@ -4,9 +4,12 @@
 
 ## Estrutura do Projeto
 
-- `src/main/java/com/trivia/client` — Integrações com clientes externos
-- `src/main/java/com/trivia/service` — Lógica de negócio
+- `src/main/java/com/trivia/client` — Integração com APIs externas (OpenTdbClient)
+- `src/main/java/com/trivia/client/dto` — DTOs para comunicação com APIs externas
+- `src/main/java/com/trivia/service` — Serviços de negócio
+- `src/main/java/com/trivia/service/dto` — DTOs e Enums usados internamente
 - `src/main/java/com/trivia/controller` — Controllers REST
+- `src/main/java/com/trivia/exception` — Exceptions customizadas
 - `src/main/resources` — Configurações da aplicação
 - `src/test/java` — Testes automatizados
 
@@ -45,11 +48,28 @@ Você pode visualizar, testar e explorar todos os endpoints REST disponíveis.
 
 ## Integração com OpenTDB
 
-O projeto implementa um client Java para consumir a API pública [OpenTDB](https://opentdb.com/api_config.php), permitindo buscar perguntas e respostas para o jogo.
+Este projeto integra a [OpenTDB](https://opentdb.com/api_config.php) para buscar perguntas, categorias, tokens e estatísticas do banco de dados público de trivia.
+
+### Endpoints REST disponíveis
+
+- **POST** `/opentdb/trivia` — Busca perguntas de trivia conforme parâmetros enviados
+- **GET** `/opentdb/categories` — Lista todas as categorias disponíveis
+- **GET** `/opentdb/token` — Gera um novo token de sessão
+- **GET** `/opentdb/token/reset?token=...` — Reseta o token informado
+- **GET** `/opentdb/count` — Retorna estatísticas globais de perguntas
 
 ### Funcionamento
 
-- O client (`OpenTdbClient`) utiliza `RestTemplate` para realizar requisições HTTP.
-- O tratamento de erros é feito para garantir respostas padronizadas em caso de falha na comunicação.
+- O client (`OpenTdbClient`) monta as URLs dinamicamente e faz requisições HTTP usando `RestTemplate`.
+- Parâmetros só são enviados se forem diferentes de null.
+- O tratamento de erros é centralizado: códigos de erro da OpenTDB são convertidos em exceptions customizadas e retornam mensagens padronizadas para o usuário.
 
-- [Documentação oficial](https://opentdb.com/api_config.php)
+### Tratamento de erros
+
+- Códigos de resposta da OpenTDB são verificados e convertidos em exceptions específicas.
+- Exemplo: código 5 (rate limit) retorna HTTP 429 para o cliente.
+- Todos os erros são logados e retornam mensagens claras para facilitar o diagnóstico.
+
+### Referência
+
+- [Documentação oficial da OpenTDB](https://opentdb.com/api_config.php)
