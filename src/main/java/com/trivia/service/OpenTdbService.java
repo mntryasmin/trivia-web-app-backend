@@ -30,7 +30,8 @@ public class OpenTdbService {
     }
 
     // Questions
-    public TdbTriviaDTO getTrivia(Long amount, String token) {
+    public TdbTriviaDTO getTrivia(Long amount) {
+        String token = getToken();
         return openTdbClient.getTrivia(amount, token);
     }
 

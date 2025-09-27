@@ -29,9 +29,8 @@ public class OpenTdbController {
     }
 
     @GetMapping("/trivia")
-    public ResponseEntity<?> getTrivia(@RequestParam(name = "amount", defaultValue = "10") Long amount,
-            @RequestParam(name = "token", required = false) String token) {
-        return ResponseEntity.ok(openTdbService.getTrivia(amount, token));
+    public ResponseEntity<?> getTrivia(@RequestParam(name = "amount", defaultValue = "10") Long amount) {
+        return ResponseEntity.ok(openTdbService.getTrivia(amount));
     }
 
     @GetMapping("/categories")
